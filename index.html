@@ -1,0 +1,433 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Invoice Agent</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- jsPDF Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Background Decorations -->
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+
+
+    <!-- Main Container -->
+    <main class="container">
+
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="logo">🤖</div>
+
+                <div>
+                    <h1>Muhammad Tariq Mahboob</h1>
+                    <p>AI Invoice Agent • Smart • Fast • Professional</p>
+                </div>
+
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                AI Agent Online
+            </div>
+
+        </header>
+
+
+        <!-- Hero Section -->
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="badge">
+                    ✨ AI POWERED INVOICING
+                </span>
+
+                <h2>
+                    Create professional invoices
+                    <span>with AI</span>
+                </h2>
+
+                <p>
+                    Enter your customer and product details.
+                    Our AI Invoice Agent will prepare a professional
+                    invoice for you.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Invoice Form -->
+        <section class="invoice-card">
+
+            <div class="card-title">
+
+                <div class="title-icon">🧾</div>
+
+                <div>
+                    <h3>Create New Invoice</h3>
+                    <p>Enter invoice information below</p>
+                </div>
+
+            </div>
+
+
+            <form id="invoiceForm">
+
+
+                <!-- Customer Information -->
+                <div class="section-title">
+                    👤 Customer Information
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label for="customerName">
+                            Customer Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            placeholder="Enter customer name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="customerEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="customerEmail"
+                            placeholder="customer@example.com"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Product Information -->
+                <div class="section-title">
+                    📦 Product / Service
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label for="productName">
+                            Product / Service Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            placeholder="e.g. Website Development"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="quantity">
+                            Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            placeholder="1"
+                            min="1"
+                            value="1"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label for="price">
+                            Price Per Item (PKR)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="price"
+                            placeholder="25000"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="discount">
+                            Discount (PKR)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="discount"
+                            placeholder="0"
+                            min="0"
+                            value="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Generate Button -->
+                <button
+                    type="submit"
+                    class="generate-btn"
+                >
+                    <span>🤖</span>
+                    Generate AI Invoice
+                    <span>→</span>
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- Invoice Preview -->
+        <section
+            class="invoice-preview"
+            id="invoicePreview"
+        >
+
+            <!-- Preview Header -->
+            <div class="preview-header">
+
+                <div>
+
+                    <span class="preview-label">
+                        AI GENERATED
+                    </span>
+
+                    <h3>
+                        Invoice Preview
+                    </h3>
+
+                </div>
+
+                <div class="preview-logo">
+                    🤖
+                </div>
+
+            </div>
+
+
+            <!-- Invoice Information -->
+            <div class="invoice-info">
+
+                <div>
+
+                    <span>
+                        Invoice No.
+                    </span>
+
+                    <strong id="previewInvoiceNumber">
+                        ---
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Date
+                    </span>
+
+                    <strong id="previewDate">
+                        ---
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Bill To -->
+            <div class="bill-to">
+
+                <span>
+                    BILL TO
+                </span>
+
+                <h4 id="previewCustomer">
+                    Customer Name
+                </h4>
+
+                <p id="previewEmail">
+                    Email
+                </p>
+
+            </div>
+
+
+            <!-- Invoice Item -->
+            <div class="invoice-item">
+
+                <div>
+
+                    <strong id="previewProduct">
+                        Product / Service
+                    </strong>
+
+                    <p>
+                        Quantity:
+                        <span id="previewQuantity">
+                            0
+                        </span>
+                    </p>
+
+                </div>
+
+
+                <strong id="previewItemTotal">
+                    PKR 0
+                </strong>
+
+            </div>
+
+
+            <!-- Invoice Summary -->
+            <div class="invoice-summary">
+
+                <div>
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="previewSubtotal">
+                        PKR 0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <strong id="previewDiscount">
+                        PKR 0
+                    </strong>
+
+                </div>
+
+
+                <div class="grand-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="previewTotal">
+                        PKR 0
+                    </strong>
+
+                </div>
+
+            </div>
+            <!-- AI Summary -->
+<div class="ai-summary-box">
+    <h3>🤖 AI Invoice Summary</h3>
+    <p id="aiSummary">
+        AI summary will appear here...
+    </p>
+</div>
+<button id="downloadPdfBtn" class="download-pdf-btn">
+    📥 Download Invoice PDF
+</button>
+
+            <!-- Preview Footer -->
+            <div class="preview-footer">
+
+                <p>
+                    ✨ Generated by AI Invoice Agent
+                </p>
+
+                <strong>
+                    Muhammad Tariq Mahboob
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>
+                © 2026
+                <strong>Muhammad Tariq Mahboob</strong>
+                • AI Invoice Agent
+            </p>
+
+            <p>
+                Powered by
+                <strong>Python + AI</strong>
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
