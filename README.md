@@ -5,7 +5,8 @@ A modern AI-powered invoice generator that allows users to create professional i
 ## 🌐 Live Demo
 
 **AI Invoice Agent:**
-https://ai-invoice-agent-chi.vercel.app/
+
+https://ai-invoice-agent-one.vercel.app/
 ## 📸 Project Preview
 
 ![AI Invoice Agent](ai-invoice-agent.png)
